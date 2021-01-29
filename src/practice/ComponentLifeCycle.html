@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Component Life Cycle</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<h1>Component Life Cycle</h1>
+<div id="root"></div>
+
+<!--    <script type="text/babel">-->
+<!--        // 1. what is Component Life Cycle-->
+<!--        //  - life cycle: creation(mounting) updating unmount-->
+<!--        //  - life cycle function-->
+
+<!--        // 2. how to use life cycle fns-->
+<!--        class Child extends React.Component {-->
+<!--            constructor() {-->
+<!--                super();-->
+<!--                this.state = {-->
+<!--                    data: 200-->
+<!--                }-->
+<!--                console.log('1. constructor');-->
+<!--            }-->
+
+<!--            // required-->
+<!--            render() {-->
+<!--                console.log('2. render')-->
+<!--                // this.setState({}) X-->
+<!--                return (-->
+<!--                    <div>-->
+<!--                        <h3>this is Child</h3>-->
+<!--                        <h5>num from Parent: { this.props.num }</h5>-->
+<!--                        <h5>my data: { this.state.data }</h5>-->
+<!--                        <button onClick={-->
+<!--                            () => {-->
+<!--                                this.setState( pre => ({data: pre.data + 10}))-->
+<!--                            }-->
+<!--                        }>add 10</button>-->
+<!--                    </div>-->
+<!--                )-->
+<!--            }-->
+
+<!--            componentDidUpdate(preProps, preState) {-->
+<!--                console.log('componentDidUpdate')-->
+<!--                // console.log('prePro -> ', preProps)-->
+<!--                //-->
+<!--                // if(this.props.num === 2 * preProps.num) {-->
+<!--                //     console.log('haha')-->
+<!--                // }-->
+<!--                // console.log('preState -> ', preState)-->
+<!--            }-->
+
+<!--            componentDidMount() {-->
+<!--                console.log('3. didMount')-->
+<!--                // real dom-->
+<!--                // var h3 = document.getElementsByTagName('h3')[0];-->
+<!--                // console.log(h3)-->
+<!--                // h3.innerHTML = "haha"-->
+<!--            }-->
+
+<!--            componentWillUnmount() {-->
+<!--                console.log('componentDidUnmount');-->
+<!--            }-->
+
+<!--        }-->
+
+<!--        class Parent extends React.Component {-->
+<!--            constructor() {-->
+<!--                super();-->
+<!--                this.state = {-->
+<!--                    isShow: false,-->
+<!--                    num: 10-->
+<!--                }-->
+<!--                // this.isShow = true;-->
+<!--            }-->
+
+<!--            render() {-->
+<!--                // console.log('p render')-->
+<!--                return (-->
+<!--                    <div>-->
+<!--                        <h2>this is Parent</h2>-->
+<!--                        <button onClick={-->
+<!--                            () => {-->
+<!--                                // console.log('parent clicked');-->
+<!--                                this.setState({-->
+<!--                                    isShow: !this.state.isShow-->
+<!--                                })-->
+<!--                            }-->
+<!--                        }> show / hide child</button>-->
+
+<!--                        {-->
+<!--                            this.state.isShow-->
+<!--                                ?-->
+<!--                                <div>-->
+<!--                                    <button onClick={-->
+<!--                                        () => {-->
+<!--                                            this.setState( pre => ({num: pre.num + 10}))-->
+<!--                                        }-->
+<!--                                    }>add 10</button>-->
+<!--                                    <Child num={this.state.num}/>-->
+<!--                                </div>-->
+<!--                                :-->
+<!--                                null-->
+<!--                        }-->
+<!--                    </div>-->
+<!--                )-->
+<!--            }-->
+<!--        }-->
+
+<!--        ReactDOM.render(-->
+<!--            <Parent />,-->
+<!--            document.getElementById("root")-->
+<!--        )-->
+<!--    </script>-->
+
+<script type="text/javascript">
+  // cb
+  // 1. what is cb
+  //  - fn
+  //  - as parameter
+
+  // function test() {
+  //     console.log('test')
+  // }
+  // var test1 = function() {
+  //     console.log('test1')
+  // }
+  // test();
+  // test1();
+
+  // 2. how to use cb
+  // function fn(cb) {
+  //     console.log('fn');
+  //     // console.log(cb)
+  //
+  //     cb('fn');
+  //     console.log('2');
+  // }
+  //
+  // // function test(str) {
+  // //     console.log('test', str)
+  // // }
+  // //
+  // // fn(test); // ?
+  //
+  // fn(function (str) {
+  //     console.log('test', str)
+  // })
+
+  // 3. why use cb?
+  // -- scalability (a, b, type)
+  // function cal(a, b, type) {
+  //     if(type === "+") {
+  //         return a + b;
+  //     }else if(type === "-") {
+  //         return a - b;
+  //     }else {
+  //         return "I don't know"
+  //     }
+  // }
+  //
+  // var res = cal(1, 5, "*");
+
+  // function cal2(a, b, cb) {
+  //     return cb(a, b);
+  // }
+  //
+  // var add = function(a, b) {
+  //     return a + b;
+  // }
+  //
+  // var minus = function(a, b) {
+  //     return a - b;
+  // }
+  //
+  // var res = cal2(1, 5, add);
+  // 4. cb classification
+  //    - sync
+  //    - async
+  // - sync
+  // console.log(1);
+  // var a = "hello";
+  // console.log(a);
+
+  // - async
+  // console.log(2);
+  // setTimeout(function() {
+  //     console.log(3);
+  // }, 0)
+  // console.log(4);
+
+  // console.log('start')
+  // var arr = [1, 2, 3];
+  // arr.forEach( function(item) {
+  //     console.log(item * 2)
+  // });
+  // console.log('end')
+
+  // cb problem - callback hell
+
+  // solution c.h -> promise
+  console.log(1)
+  var promise = new Promise(function(res, rej) {
+    console.log(2)
+    setTimeout( function() {
+      let num = Math.random() * 100;
+      // console.log(num);
+      if( num > 60 ) {
+        res(num)
+      } else {
+        rej(num)
+      }
+    }, 1000)
+  });
+
+  console.log(3)
+  // promise.then(
+  //     function(res) {
+  //         console.log('success -> ', res);
+  //     },
+  //     function(err) {
+  //         console.log('err -> ', err);
+  // })
+
+  promise
+  .then( res => console.log(res))
+  .catch( err => console.log( err) )
+
+  // 3 status: pending resolved reject
+
+</script>
+</body>
+</html>

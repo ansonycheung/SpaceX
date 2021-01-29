@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+        r: 100,
+        g: 120,
+        b: 160
+      }
+    }
+
+    render() {
+      return (
+          <div>
+            <div style={{
+              "backgroundColor": `rgb(${this.state.r}, ${this.state.g}, ${this.state.b}`,
+              "width": "200px",
+              "height": "200px"
+            }}>box
+            </div>
+
+            <p>
+              red :
+              <input type="range"
+                     min="0"
+                     max="255"
+                     value={this.state.r}
+                     onChange={
+                       (e) => { console.log(e.target);
+                       this.setState({ r: e.target.value
+                  });
+                }
+              }/>
+              {this.state.r}
+            </p>
+            <p>
+              green :
+              <input type="range"
+                     min="0"
+                     max="255"
+                     value={this.state.g}
+                     onChange={
+                       (e) => { console.log(e.target);
+                       this.setState({ g: e.target.value
+                  });
+                }
+              }/>
+              {this.state.g}
+            </p>
+            <p>
+              blue :
+              <input type="range"
+                     min="0"
+                     max="255"
+                     value={this.state.b}
+                     onChange={
+                       (e) => { console.log(e.target);
+                       this.setState({ b: e.target.value
+                  });
+                }
+              }/>
+              {this.state.b}
+            </p>
+          </div>
+      )
+    }
+  }
+
+  ReactDOM.render(
+      <App/>,
+      document.getElementById('root')
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Uncontrolled Component</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+  // uncontrolled component
+  //    1. collecting data
+  //    2. not a two-way binding
+  //    3. how to get data ->ref
+
+  // how to define a ref
+  // how to use a ref
+  // methods
+  //   1. string ref <= react 15.
+  //   2. react.createRef >= 16.  w/ onClick
+  //   3. call back method   w/o onClick
+
+  class App extends React.Component {
+    constructor() {
+      super();
+      this.myHaha = React.createRef();
+      console.log(this.myHaha)
+    }
+    render() {
+      return (
+
+          <div>
+            <input type="text" ref="myInput"/>
+            <button onClick={
+              () => {
+                console.log(1)
+                console.log(this.refs.myInput.value)
+              }
+            }>click me</button>
+
+            <hr/>
+
+            <input type="text" ref={this.myHaha}/>
+            <button onClick={
+              () => {
+                console.log(this.myHaha.current.value);
+              }
+            }>click me2</button>
+
+            <hr/>
+
+            <p ref={
+              pInstance => {
+                console.log(pInstance)
+              }
+            }>this ia a paragraph</p>
+          </div>
+
+
+      )
+    }
+  }
+
+  ReactDOM.render(
+      <App />,
+      document.getElementById("root")
+  )
+</script>
+
+</body>
+</html>

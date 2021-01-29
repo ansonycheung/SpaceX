@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise + Ajax</title>
+</head>
+<body>
+<h1>Callback Fn + Promise + Ajax</h1>
+<script type="text/javascript">
+  // ajax
+  // - what is ajax
+  // - how to use
+  //    4 steps
+  // step1: create ajax
+  // var xhr = new XMLHttpRequest();
+  // console.log(xhr.readyState)
+
+  // step2: config
+  //  url method data
+  // xhr.open('GET', 'https://petstore.swagger.io/v2/swagger.json', true);
+
+  // ste3: send
+  // xhr.send();
+
+  // xhr.setRequestHeader("content-type", "application/json")
+  // xhr.send(data)
+  //
+  // console.log(xhr.readyState)
+  // console.log(xhr)
+
+  // step4: listen req + res
+  // xhr.onload = function () {
+  //     if(xhr.status === 200) {
+  //         var obj = JSON.parse(xhr.responseText)
+  //         console.log(obj)
+  //     }
+  // }
+  //
+  // xhr.onerror = function () {
+  //     console.log('err')
+  // }
+
+  // params: method, url, data, sc, ec
+  function ajax(opt) {
+    var opt = opt || {},
+        method = opt.method || 'GET',
+        url = opt.url,
+        data = opt.data || null,
+        success = opt.success || function() {},
+        error = opt.error || function() {},
+        //step1:
+        xhr = new XMLHttpRequest();
+
+    // step2:
+    xhr.open(method, url, true);
+
+    // step3:
+    if(!data){
+      xhr.send();
+    }
+
+    // step4:
+    xhr.onload = function() {
+      if(xhr.status === 200) {
+        success(JSON.parse(xhr.responseText))
+      } else {
+        error();
+      }
+    }
+
+    xhr.onerror = function () {
+      error();
+    }
+  }
+
+  // ajax( {
+  //     method: 'GET',
+  //     url: 'https://petstore.swagger.io/v2/swagger.json',
+  //     success: function( response ) {
+  //         console.log('1')
+  //         console.log(response)
+  //         // req2
+  //         ajax({
+  //             method: 'GET',
+  //             url: 'https://petstore.swagger.io/v2/swagger.json',
+  //             success: function (response2) {
+  //                 console.log('2')
+  //                 console.log(response2)
+  //             }
+  //         })
+  //     },
+  //     error: function() {
+  //         console.log('error')
+  //     }
+  // } )
+
+
+</script>
+
+<script type="text/javascript">
+  function ajax(opt) {
+    var opt = opt || {},
+        method = opt.method || 'GET',
+        url = opt.url,
+        data = opt.data || null,
+        success = opt.success || function() {},
+        error = opt.error || function() {},
+        //step1:
+        xhr = new XMLHttpRequest();
+
+    // step2:
+    xhr.open(method, url, true);
+
+    // step3:
+    if(!data){
+      xhr.send();
+    }
+
+    // step4:
+    xhr.onload = function() {
+      if(xhr.status === 200) {
+        success(JSON.parse(xhr.responseText))
+      } else {
+        error();
+      }
+    }
+
+    xhr.onerror = function () {
+      error();
+    }
+  }
+
+  // ajax( {
+  //     method: 'GET',
+  //     url: 'https://petstore.swagger.io/v2/swagger.json',
+  //     success: function( response ) {
+  //         console.log('1')
+  //         console.log(response)
+  //         // req2
+  //         ajax({
+  //             method: 'GET',
+  //             url: 'https://petstore.swagger.io/v2/swagger.json',
+  //             success: function (response2) {
+  //                 console.log('2')
+  //                 console.log(response2)
+  //
+  //                 // re3
+  //             }
+  //         })
+  //     },
+  //     error: function() {
+  //         console.log('error')
+  //     }
+  // } )
+
+  // promise
+  function promisifyAjax(opt) {
+    var setting = opt || {};
+
+    // create promise obj
+    var promiseObj = new Promise(function(resolve, reject) {
+      var opt = setting || {},
+          method = opt.method || 'GET',
+          url = opt.url,
+          data = opt.data || null,
+          //step1:
+          xhr = new XMLHttpRequest();
+
+      // step2:
+      xhr.open(method, url, true);
+
+      // step3:
+      if(!data){
+        xhr.send();
+      }
+
+      // step4:
+      xhr.onload = function() {
+        if(xhr.status === 200) {
+          // success(JSON.parse(xhr.responseText))
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          // error();
+          reject("server error");
+        }
+      }
+
+      xhr.onerror = function () {
+        // error();
+        reject("error");
+      }
+    });
+
+    return promiseObj;
+  }
+
+  // req1
+  promisifyAjax({
+    method: 'GET',
+    url: 'https://petstore.swagger.io/v2/swagger.json'
+  }).then( function(res) {
+    console.log('11 -> ', res);
+
+    // req2
+    return promisifyAjax({
+      method: 'GET',
+      url: 'https://petstore.swagger.io/v2/swagger.json'
+    })
+  }).then( function( res ) {
+    console.log('111 -> ', res);
+  }).catch( function(err) {
+    console.log('12 -> ', err);
+  })
+</script>
+</body>
+</html>
