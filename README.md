@@ -20,6 +20,10 @@
   <li>antDesign 3</li>
   <li>axios</li>
   <li>http-proxy-middleware</li>
+  <li>topojson client</li>
+  <li>D3 geo</li>
+  <li>D3 geo projection</li>
+  <li>D3 selection</li>
 </ul>  
 
 
