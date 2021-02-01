@@ -21,21 +21,22 @@
   //      - c, props.key
   class Child extends React.Component {
     render() {
-      const { count } = this.props;
+      const {count} = this.props;
       return (
           <div>
             <h2>This is Child</h2>
             <h3>data from Parent: {count}</h3>
 
-            <br />
+            <br/>
             <button onClick={
               () => {
-                const { count } = this.props;
+                const {count} = this.props;
                 console.log(1);
                 // console.log(this.props.onChangeNum)
                 this.props.onChangeNum(count + 20)
               }
-            }>change parent data</button>
+            }>change parent data
+            </button>
           </div>
       )
     }
@@ -52,14 +53,15 @@
     state = {
       num: 10
     }
+
     render() {
-      const { num } = this.state;
+      const {num} = this.state;
       return (
           <div>
             <h2>This is Parent</h2>
-            <h3>my own data is: { num }</h3>
+            <h3>my own data is: {num}</h3>
 
-            <hr />
+            <hr/>
 
             <Child count={num}
                    onChangeNum={this.changeNum}
@@ -70,12 +72,12 @@
 
     changeNum = (data) => {
       console.log('change data...', data)
-      this.setState({ num: data })
+      this.setState({num: data})
     }
   }
 
   ReactDOM.render(
-      <Parent />,
+      <Parent/>,
       document.getElementById("root")
   )
 </script>

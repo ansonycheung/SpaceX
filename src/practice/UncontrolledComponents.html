@@ -29,6 +29,7 @@
       this.myHaha = React.createRef();
       console.log(this.myHaha)
     }
+
     render() {
       return (
 
@@ -39,7 +40,8 @@
                 console.log(1)
                 console.log(this.refs.myInput.value)
               }
-            }>click me</button>
+            }>click me
+            </button>
 
             <hr/>
 
@@ -48,7 +50,8 @@
               () => {
                 console.log(this.myHaha.current.value);
               }
-            }>click me2</button>
+            }>click me2
+            </button>
 
             <hr/>
 
@@ -59,13 +62,12 @@
             }>this ia a paragraph</p>
           </div>
 
-
       )
     }
   }
 
   ReactDOM.render(
-      <App />,
+      <App/>,
       document.getElementById("root")
   )
 </script>

@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Form, Button, InputNumber } from "antd";
+import React, {Component} from "react";
+import {Button, Form, InputNumber} from "antd";
 
 class SatSettingForm extends Component {
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const {getFieldDecorator} = this.props.form;
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 11 }
+        xs: {span: 24},
+        sm: {span: 11}
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 13 }
+        xs: {span: 24},
+        sm: {span: 13}
       }
     };
     return (
@@ -32,7 +32,7 @@ class SatSettingForm extends Component {
                 <InputNumber
                     min={-180}
                     max={180}
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     placeholder="Please input Longitude"
                 />
             )}
@@ -51,7 +51,7 @@ class SatSettingForm extends Component {
                     placeholder="Please input Latitude"
                     min={-90}
                     max={90}
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                 />
             )}
           </Form.Item>
@@ -69,7 +69,7 @@ class SatSettingForm extends Component {
                     placeholder="Please input Elevation"
                     min={-413}
                     max={8850}
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                 />
             )}
           </Form.Item>
@@ -87,7 +87,7 @@ class SatSettingForm extends Component {
                     placeholder="Please input Altitude"
                     min={0}
                     max={90}
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                 />
             )}
           </Form.Item>
@@ -105,7 +105,7 @@ class SatSettingForm extends Component {
                     placeholder="Please input Duration"
                     min={0}
                     max={90}
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                 />
             )}
           </Form.Item>
@@ -113,7 +113,7 @@ class SatSettingForm extends Component {
             <Button
                 type="primary"
                 htmlType="submit"
-                style={{ textAlign: "center" }}
+                style={{textAlign: "center"}}
             >
               Find Nearby Satellite
             </Button>
@@ -133,6 +133,6 @@ class SatSettingForm extends Component {
   };
 }
 
-const SatSetting = Form.create({ name: "satellite-setting" })(SatSettingForm);
+const SatSetting = Form.create({name: "satellite-setting"})(SatSettingForm);
 
 export default SatSetting;

@@ -204,12 +204,12 @@
 
   // solution c.h -> promise
   console.log(1)
-  var promise = new Promise(function(res, rej) {
+  var promise = new Promise(function (res, rej) {
     console.log(2)
-    setTimeout( function() {
+    setTimeout(function () {
       let num = Math.random() * 100;
       // console.log(num);
-      if( num > 60 ) {
+      if (num > 60) {
         res(num)
       } else {
         rej(num)
@@ -227,8 +227,8 @@
   // })
 
   promise
-  .then( res => console.log(res))
-  .catch( err => console.log( err) )
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 
   // 3 status: pending resolved reject
 
